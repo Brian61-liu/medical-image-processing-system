@@ -1422,7 +1422,7 @@ class XfyunVoiceRecognitionWorker(threading.Thread):
 
         if not self.appid or not self.api_key or not self.api_secret:
             self.status_signal.emit(
-                "未检测到讯飞密钥环境变量。请设置 XFYUN_APPID、XFYUN_API_KEY、XFYUN_API_SECRET 后重新打开 PyCharm。"
+                "未检测到讯飞密钥环境变量。请设置 XFYUN_APPID、XFYUN_API_KEY、XFYUN_API_SECRET 后重新启动程序。"
             )
             return False
 
@@ -2013,7 +2013,7 @@ class MedicalImageProcessingSystem(QMainWindow):
         self.stop_voice_button.clicked.connect(self.stop_voice_control)
         self.voice_help_button.clicked.connect(self.show_voice_help)
 
-        self.voice_status_label = QLabel("语音状态：未开启。设置讯飞环境变量后，可把10张图片放入项目 images 文件夹，说“打开默认文件夹”开始无鼠标演示。")
+        self.voice_status_label = QLabel("语音状态：未开启。设置讯飞环境变量后，可把图片放入项目 images 文件夹，说“打开默认文件夹”开始无鼠标演示。")
         self.voice_status_label.setFont(QFont("Microsoft YaHei", 9))
         self.voice_status_label.setStyleSheet("color: #444444;")
         self.voice_status_label.setWordWrap(True)
@@ -2306,13 +2306,6 @@ class MedicalImageProcessingSystem(QMainWindow):
         self.current_index = 0
         self.load_image_by_path(self.image_files[self.current_index])
 
-        if len(image_files) < 10:
-            QMessageBox.information(
-                self,
-                "提示",
-                f"当前文件夹中找到 {len(image_files)} 张图像。项目指导书要求不少于10张医学图像，建议后续补足到10张以上。",
-            )
-
     def load_default_image_folder(self) -> None:
         """
         读取项目目录下的 images 文件夹。
@@ -2579,7 +2572,7 @@ class MedicalImageProcessingSystem(QMainWindow):
             "9. 文件操作：保存图像、关闭语音、退出程序\n\n"
             "识别不准时建议使用短口令：\n"
             "下一张、上一张、滤波、罗伯茨、梯度、纹理、坎尼、分割、伪彩色、质量评价、批量处理、保存。\n\n"
-            "说明：如果想全程尽量不用鼠标，建议提前把10张医学图像放入项目目录下的 images 文件夹，"
+            "说明：如果想全程尽量不用鼠标，建议提前把医学图像放入项目目录下的 images 文件夹，"
             "然后开启讯飞云语音控制后说“打开默认文件夹”。"
         )
         QMessageBox.information(self, "语音指令帮助", help_text)
@@ -2685,7 +2678,7 @@ class MedicalImageProcessingSystem(QMainWindow):
                     best_command = command
                     best_keyword = keyword
 
-        # 0.58偏宽松，适合课堂演示；如果误触发多，可改为0.65。
+        # 0.58偏宽松，减少漏识别；如果误触发多，可改为0.65。
         if best_score >= 0.58:
             return best_command, best_score, best_keyword
 

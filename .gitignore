@@ -11,5 +11,6 @@ Thumbs.db
 *.csv
 *report.txt
 
-# Never commit real patient data
+# Never commit real patient data (the bundled sample is a synthetic phantom)
 *.dcm
+!images/phantom_ct.dcm
