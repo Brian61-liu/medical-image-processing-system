@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Reports and metric tables exported by the app
+*.csv
+*report.txt
+
+# Never commit real patient data
+*.dcm

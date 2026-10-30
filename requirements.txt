@@ -1,0 +1,8 @@
+PyQt5>=5.15
+opencv-python>=4.5
+numpy>=1.21
+pydicom>=2.3
+
+# Optional: iFlytek voice control
+websocket-client>=1.5
+sounddevice>=0.4
